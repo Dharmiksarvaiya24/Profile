@@ -1,0 +1,466 @@
+/* ============================================
+   SHARED SECTION STYLES
+   Matches the existing glassmorphic design system:
+   - Background: #0a0e27
+   - Accent: rgba(100, 200, 255) - cyan
+   - Secondary: rgba(150, 100, 255) - purple
+   - Glass: rgba(255,255,255,0.08) + backdrop blur
+   ============================================ */
+
+/* --- Section Container --- */
+.section-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px 20px;
+  animation: sectionFadeIn 0.7s ease-out both;
+}
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Section Header --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(100, 200, 255, 0.12);
+  border: 1px solid rgba(100, 200, 255, 0.25);
+  color: rgba(100, 200, 255, 0.9);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* --- Shared Glass Card for Sections --- */
+.glass-card-section {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px 28px;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: cardSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  position: relative;
+}
+
+.glass-card-section:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(100, 200, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(100, 200, 255, 0.06);
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TIMELINE (Experience & Education)
+   ============================================ */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  padding-left: 0;
+}
+
+.timeline-item {
+  position: relative;
+  animation: cardSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Dots hidden — no line */
+.timeline-dot {
+  display: none;
+}
+
+.timeline-content {
+  margin-left: 0;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.timeline-role {
+  font-size: 17px;
+  font-weight: 650;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.timeline-company {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(100, 200, 255, 0.75);
+  display: block;
+}
+
+.timeline-duration {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.current-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.18), rgba(150, 100, 255, 0.1));
+  border: 1px solid rgba(100, 200, 255, 0.35);
+  color: rgba(100, 200, 255, 0.95);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 8px rgba(100, 200, 255, 0.1);
+}
+
+.timeline-institution {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(150, 100, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.timeline-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* ============================================
+   PROJECTS
+   ============================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.project-card-accent {
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(100, 200, 255, 0.4),
+      transparent);
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 650;
+  color: #ffffff;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.project-description {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.tech-tag {
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: rgba(100, 200, 255, 0.08);
+  border: 1px solid rgba(100, 200, 255, 0.18);
+  color: rgba(100, 200, 255, 0.85);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.25s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(100, 200, 255, 0.15);
+  border-color: rgba(100, 200, 255, 0.35);
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 550;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: rgba(100, 200, 255, 0.15);
+  border-color: rgba(100, 200, 255, 0.4);
+  color: rgba(100, 200, 255, 1);
+  transform: translateY(-1px);
+}
+
+.project-link-primary {
+  background: linear-gradient(135deg,
+      rgba(100, 200, 255, 0.12),
+      rgba(150, 100, 255, 0.08));
+  border-color: rgba(100, 200, 255, 0.25);
+  color: rgba(100, 200, 255, 0.9);
+}
+
+.more-projects-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(100, 200, 255, 0.7);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.3s ease;
+}
+
+.more-projects-link:hover {
+  color: rgba(100, 200, 255, 1);
+}
+
+/* ============================================
+   SKILLS
+   ============================================ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.skill-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(100, 200, 255, 0.1);
+  border: 1px solid rgba(100, 200, 255, 0.2);
+  color: rgba(100, 200, 255, 0.85);
+  flex-shrink: 0;
+}
+
+.skill-category-title {
+  font-size: 15px;
+  font-weight: 650;
+  color: #ffffff;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background: rgba(100, 200, 255, 0.1);
+  border-color: rgba(100, 200, 255, 0.3);
+  color: rgba(100, 200, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 200, 255, 0.1);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET
+   ============================================ */
+@media (max-width: 768px) {
+  .section-container {
+    padding: 50px 15px 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+  }
+
+  .projects-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .timeline-duration {
+    font-size: 11px;
+  }
+
+  .glass-card-section {
+    padding: 20px 22px;
+    border-radius: 18px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+@media (max-width: 480px) {
+  .section-container {
+    padding: 40px 12px 12px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+  }
+
+  .section-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .timeline {
+    gap: 18px;
+  }
+
+  .timeline-role {
+    font-size: 15px;
+  }
+
+  .timeline-company {
+    font-size: 13px;
+  }
+
+  .timeline-description {
+    font-size: 13px;
+  }
+
+  .project-title {
+    font-size: 15px;
+  }
+
+  .project-description {
+    font-size: 13px;
+  }
+
+  .glass-card-section {
+    padding: 18px 18px;
+    border-radius: 16px;
+  }
+
+  .skill-tag {
+    padding: 5px 11px;
+    font-size: 12px;
+  }
+
+  .tech-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+}

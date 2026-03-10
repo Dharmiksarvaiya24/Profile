@@ -1,9 +1,29 @@
 "use client"
 
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, ChevronDown } from "lucide-react"
+import React, { lazy, Suspense } from "react"
 import "./css/background.css"
 
+// Lazy load sections for performance
+const Experience = lazy(() => import("./Experience.jsx"))
+const Projects = lazy(() => import("./Projects.jsx"))
+const Skills = lazy(() => import("./Skills.jsx"))
+const Education = lazy(() => import("./Education.jsx"))
+
+function SectionLoader() {
+  return (
+    <div className="section-loader">
+      <div className="section-loader-spinner" />
+    </div>
+  )
+}
+
 export default function Portfolio() {
+  const scrollToContent = () => {
+    const el = document.getElementById("experience")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <div className="portfolio-container">
       {/* Background Video with Blur */}
@@ -71,13 +91,46 @@ export default function Portfolio() {
                 >
                   <Linkedin size={20} />
                 </a>
-               <a href="mailto:dharmik.be@gmail.com" className="social-icon" aria-label="Email">
+                <a href="mailto: connect@dharmik.live" className="social-icon" aria-label="Email">
                   <Mail size={20} />
                 </a>
               </div>
             </div>
           </div>
+
+          {/* Scroll indicator */}
+          <button
+            className="scroll-indicator"
+            onClick={scrollToContent}
+            aria-label="Scroll to content"
+          >
+            <ChevronDown size={22} />
+          </button>
         </div>
+      </div>
+
+      {/* Sections below the hero */}
+      <div className="sections-wrapper">
+        <Suspense fallback={<SectionLoader />}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Skills />
+        </Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Education />
+        </Suspense>
+
+        {/* Footer */}
+        <footer className="portfolio-footer">
+          <div className="footer-divider" />
+          <p className="footer-text">
+            Designed & Built by <span className="footer-accent">Dharmik Sarvaiya</span>
+          </p>
+        </footer>
       </div>
     </div>
   )
