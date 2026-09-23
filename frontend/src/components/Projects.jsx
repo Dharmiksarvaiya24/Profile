@@ -73,16 +73,18 @@ export default function Projects() {
                             ))}
                         </div>
                         <div className="project-links">
-                            <a
-                                href={project.githubLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="project-link"
-                                aria-label="View source code"
-                            >
-                                <Github size={16} />
-                                <span>Code</span>
-                            </a>
+                            {project.githubLink && (
+                                <a
+                                    href={project.githubLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-link"
+                                    aria-label="View source code"
+                                >
+                                    <Github size={16} />
+                                    <span>Code</span>
+                                </a>
+                            )}
                             {project.liveLink && project.liveLink !== "#" && (
                                 <a
                                     href={project.liveLink}
