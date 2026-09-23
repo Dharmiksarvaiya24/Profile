@@ -1,6 +1,7 @@
 import React from "react";
 import { Briefcase } from "lucide-react";
 import "./css/sections.css";
+import useScrollAnimation, { useScrollAnimationAll } from "../hooks/useScrollAnimation";
 
 const experiences = [
   {
@@ -22,9 +23,12 @@ const experiences = [
 ]
 
 export default function Experience() {
+  const headerRef = useScrollAnimation({ threshold: 0.2 });
+  const timelineRef = useScrollAnimationAll({ selector: ".scroll-item" });
+
   return (
     <section className="section-container" id="experience">
-      <div className="section-header">
+      <div className="section-header scroll-blur-in" ref={headerRef}>
         <div className="section-icon-wrapper">
           <Briefcase size={20} />
         </div>
@@ -32,12 +36,11 @@ export default function Experience() {
         <p className="section-subtitle">My professional journey</p>
       </div>
 
-      <div className="timeline">
+      <div className="timeline" ref={timelineRef}>
         {experiences.map((exp, index) => (
           <div
-            className={`timeline-item ${exp.current ? "timeline-current" : ""}`}
+            className={`timeline-item scroll-item scroll-slide-${index % 2 === 0 ? "left" : "right"} scroll-glow ${exp.current ? "timeline-current" : ""}`}
             key={index}
-            style={{ animationDelay: `${index * 0.15}s` }}
           >
             <div className="timeline-dot">
               <div className="timeline-dot-inner" />

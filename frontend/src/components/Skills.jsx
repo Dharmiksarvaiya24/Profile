@@ -1,6 +1,7 @@
 import React from "react";
 import { Code2, Server, Wrench, Palette } from "lucide-react";
 import "./css/sections.css";
+import useScrollAnimation, { useScrollAnimationAll } from "../hooks/useScrollAnimation";
 
 const skillCategories = [
     {
@@ -25,10 +26,21 @@ const skillCategories = [
     },
 ];
 
+// Different animation per category card
+const categoryAnimations = [
+    "scroll-slide-left",
+    "scroll-slide-right",
+    "scroll-slide-left",
+    "scroll-slide-right",
+];
+
 export default function Skills() {
+    const headerRef = useScrollAnimation({ threshold: 0.2 });
+    const gridRef = useScrollAnimationAll({ selector: ".scroll-item" });
+
     return (
         <section className="section-container" id="skills">
-            <div className="section-header">
+            <div className="section-header scroll-fade-down" ref={headerRef}>
                 <div className="section-icon-wrapper">
                     <Code2 size={20} />
                 </div>
@@ -36,12 +48,11 @@ export default function Skills() {
                 <p className="section-subtitle">Technologies I work with</p>
             </div>
 
-            <div className="skills-grid">
+            <div className="skills-grid" ref={gridRef}>
                 {skillCategories.map((category, index) => (
                     <div
-                        className="skill-category glass-card-section"
+                        className={`skill-category glass-card-section scroll-item ${categoryAnimations[index]} scroll-glow`}
                         key={index}
-                        style={{ animationDelay: `${index * 0.12}s` }}
                     >
                         <div className="skill-category-header">
                             <span className="skill-category-icon">{category.icon}</span>

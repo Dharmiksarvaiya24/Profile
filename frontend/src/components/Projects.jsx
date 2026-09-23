@@ -1,46 +1,54 @@
 import React from "react";
 import { FolderGit2, ExternalLink, Github } from "lucide-react";
 import "./css/sections.css";
+import useScrollAnimation, { useScrollAnimationAll } from "../hooks/useScrollAnimation";
 
 const projects = [
     {
         title: "Trident Jewellery",
         description:
-            "	Developed the live client website tridendesgining.in using React with responsive design, optimized UI/UX, lazy loading for faster performance, and reusable component architecture for scalable and efficient frontend development.",
-        techStack: ["React", "Vite", "Tailwind", "Cloud Flare"],
+            "\tDeveloped the live client website tridendesgining.in using React with responsive design, optimized UI/UX, lazy loading for faster performance, and reusable component architecture for scalable and efficient frontend development.",
         liveLink: "https://www.tridentdesigning.in/",
-        githubLink: "#",
+    },
+      {
+        title: "UniDrive",
+        description:
+            "Architected a multi-tenant OAuth 2.0 system managing independent token lifecycles across multiple Google accounts, unified into a single real-time workspace.",
+        
+        liveLink: "https://www.unidrive.dharmik.live",
     },
     {
-        title: "PointZ - Reward System",
+        title: "GrowwDigit",
         description:
-            "Developed PointZ, a MERN stack–based social reward platform where users earn points for completing positive tasks, enable friend-controlled point editing for accountability, and redeem points for customizable rewards",
-        techStack: ["Vue", "Node.js", "Express", "MongoDB"],
-        liveLink: "pointz-gamma.vercel.app/",
-        githubLink: "https://github.com/Dharmiksarvaiya24/Pointz",
-    },
-    {
-        title: "Live Voting app - Websocket",
-        description:
-            "Developed a real-time voting application using React, Node.js, Express, and Socket.IO. Implemented features for seamless user experience and efficient voting.",
-        techStack: ["Vue", "Node.js", "Express", "MongoDB", "Socket.IO"],
-        liveLink: "socket-three-delta.vercel.app",
-        githubLink: "https://github.com/Dharmiksarvaiya24/socket",
+            "Build a Digital merketing agency help businesses grow online through branding, marketing, and performance-driven digital solutions.",
+       
+        liveLink: "https://growwdigit.in/",
     },
     {
         title: "GitHub PR Review Bot",
         description:
-            "A productivity application with drag-and-drop task organization, priority labels, due date tracking, and team collaboration features.",
-        techStack: ["GitHub Actions", "JSON", "Javascript", "Cloud Flare", "Lamma API"],
+            "Replaced GitHub Copilot's code review feature The moment a PR is opened, it automatically Pulls the code changes from the diff Sends them to an LLM with a review prompt Posts inline comments directly on the PR — like a senior engineer reviewing your code",
         liveLink: "#",
-        githubLink: "https://github.com/Dharmiksarvaiya24/git-action",
+        githubLink: "https://github.com/Dharmiksarvaiya24/Github-copilot-replica-workflow",
     },
 ];
 
+// Cycle through animation types for each card
+const cardAnimations = [
+    "scroll-flip-up",
+    "scroll-rotate-in",
+    "scroll-scale-up",
+    "scroll-rotate-in-left",
+];
+
 export default function Projects() {
+    const headerRef = useScrollAnimation({ threshold: 0.2 });
+    const gridRef = useScrollAnimationAll({ selector: ".scroll-item" });
+    const linkRef = useScrollAnimation({ threshold: 0.3 });
+
     return (
         <section className="section-container" id="projects">
-            <div className="section-header">
+            <div className="section-header scroll-scale-up" ref={headerRef}>
                 <div className="section-icon-wrapper">
                     <FolderGit2 size={20} />
                 </div>
@@ -48,18 +56,17 @@ export default function Projects() {
                 <p className="section-subtitle">Things I've built</p>
             </div>
 
-            <div className="projects-grid">
+            <div className="projects-grid" ref={gridRef}>
                 {projects.map((project, index) => (
                     <div
-                        className="project-card glass-card-section"
+                        className={`project-card glass-card-section scroll-item ${cardAnimations[index % cardAnimations.length]} scroll-glow`}
                         key={index}
-                        style={{ animationDelay: `${index * 0.12}s` }}
                     >
                         <div className="project-card-accent" />
                         <h3 className="project-title">{project.title}</h3>
                         <p className="project-description">{project.description}</p>
                         <div className="tech-stack">
-                            {project.techStack.map((tech, i) => (
+                            {project.techStack?.map((tech, i) => (
                                 <span className="tech-tag" key={i}>
                                     {tech}
                                 </span>
@@ -97,7 +104,8 @@ export default function Projects() {
                 href="https://github.com/Dharmiksarvaiya24"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="more-projects-link"
+                className="more-projects-link scroll-fade-up"
+                ref={linkRef}
             >
                  GitHub →
             </a>

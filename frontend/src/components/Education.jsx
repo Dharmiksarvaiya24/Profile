@@ -1,6 +1,7 @@
 import React from "react";
 import { GraduationCap } from "lucide-react";
 import "./css/sections.css";
+import useScrollAnimation, { useScrollAnimationAll } from "../hooks/useScrollAnimation";
 
 const education = [
     {
@@ -33,9 +34,12 @@ const education = [
 ];
 
 export default function Education() {
+    const headerRef = useScrollAnimation({ threshold: 0.2 });
+    const timelineRef = useScrollAnimationAll({ selector: ".scroll-item" });
+
     return (
         <section className="section-container" id="education">
-            <div className="section-header">
+            <div className="section-header scroll-rotate-in" ref={headerRef}>
                 <div className="section-icon-wrapper">
                     <GraduationCap size={20} />
                 </div>
@@ -43,12 +47,11 @@ export default function Education() {
                 <p className="section-subtitle">My academic background</p>
             </div>
 
-            <div className="timeline">
+            <div className="timeline" ref={timelineRef}>
                 {education.map((edu, index) => (
                     <div
-                        className={`timeline-item ${edu.current ? "timeline-current" : ""}`}
+                        className={`timeline-item scroll-item scroll-flip-up scroll-glow ${edu.current ? "timeline-current" : ""}`}
                         key={index}
-                        style={{ animationDelay: `${index * 0.15}s` }}
                     >
                         <div className="timeline-dot">
                             <div className="timeline-dot-inner" />
